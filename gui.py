@@ -78,7 +78,7 @@ def info():
                                                                                                   height=27)
                     Label(win, text="Synonyms not available", font=('calibre', 12, 'normal'), bg="gray90",
                           wraplength=330).place(x=40, y=550, height=60, width=330)
-                    Button(win, text="Close", bg="gray67", fg="black", command=Exit).place(x=100, y=640, width=200,
+                    Button(win, text="Close", bg="gray67", fg="black", command=Exit).place(x=100, y=630, width=200,
                                                                                            height=30)
             except:
                 messagebox.showerror(title="Error", message="Word is not recognize")
