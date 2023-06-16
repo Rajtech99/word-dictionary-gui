@@ -1,4 +1,5 @@
 import json
+import os
 
 
 # Define a function for save the json data
@@ -15,4 +16,5 @@ def loadFile(file):
     meaning = item[0]['meanings'][0]['definitions'][0]['definition']
     synonyms = item[0]['meanings'][0]['synonyms']
     sound = item[0]['phonetics'][0]['audio']
+    os.remove("data.json")
     return word, sound, meaning, synonyms

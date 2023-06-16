@@ -1,8 +1,8 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import messagebox
 from PIL import ImageTk, Image
 import requests
-from main import *
+import main
 import vlc
 
 
@@ -40,8 +40,8 @@ def info():
         # If the input word is a meaningful word
         if code == 200:
             try:
-                saveData("data.json", data)
-                value = loadFile("data.json")
+                main.saveData("data.json", data)
+                value = main.loadFile("data.json")
                 # Get the all required items
                 sound = value[1]
                 meaning = value[2]
@@ -49,37 +49,39 @@ def info():
                 win.geometry("400x690")
                 close_button.destroy()
                 # Display the meaning of the inputted word
-                Label(win, text="Meaning", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=300, height=27,
-                                                                                             width=100)
-                Label(win, text=meaning, font=('calibre', 10, 'normal'), bg="gray90", wraplength=330).place(x=40, y=335,
-                                                                                                            height=100,
-                                                                                                            width=330)
+                tk.Label(win, text="Meaning", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=300, height=27,
+                                                                                                width=100)
+                tk.Label(win, text=meaning, font=('calibre', 10, 'normal'), bg="gray90", wraplength=330).place(x=40,
+                                                                                                               y=335,
+                                                                                                               height=100,
+                                                                                                               width=330)
                 # Sound play button and label
-                Label(win, text="Audio", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=445, height=27)
-                Label(win, text=f"Say:", font=('calibre', 12, 'normal'), bg="gray81", fg="green").place(x=40, y=477,
-                                                                                                        height=25,
-                                                                                                        width=40)
-                Button(win, text="Play", font=('calibre', 12, 'normal'), bg="gray67", fg="black",
-                       command=playSound).place(x=90, y=477, height=25, width=100)
+                tk.Label(win, text="Audio", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=445, height=27)
+                tk.Label(win, text=f"Say:", font=('calibre', 12, 'normal'), bg="gray81", fg="green").place(x=40, y=477,
+                                                                                                           height=25,
+                                                                                                           width=40)
+                tk.Button(win, text="Play", font=('calibre', 12, 'normal'), bg="gray67", fg="black",
+                          command=playSound).place(x=90, y=477, height=25, width=100)
 
                 # Check the no. of items in synonyms
                 if len(synonyms) != 0:
                     synonyms = ', '.join(map(str, synonyms))
-                    Label(win, text="Synonyms", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=512,
-                                                                                                  height=27)
-                    Label(win, text=synonyms, font=('calibre', 12, 'normal'), bg="gray90", wraplength=330).place(x=40,
-                                                                                                                 y=550,
-                                                                                                                 height=80,
-                                                                                                                 width=330)
-                    Button(win, text="Close", bg="gray67", fg="black", command=Exit).place(x=100, y=640, width=200,
-                                                                                           height=30)
+                    tk.Label(win, text="Synonyms", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=512,
+                                                                                                     height=27)
+                    tk.Label(win, text=synonyms, font=('calibre', 12, 'normal'), bg="gray90", wraplength=330).place(
+                        x=40,
+                        y=550,
+                        height=80,
+                        width=330)
+                    tk.Button(win, text="Close", bg="gray67", fg="black", command=Exit).place(x=100, y=640, width=200,
+                                                                                              height=30)
                 else:
-                    Label(win, text="Synonyms", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=512,
-                                                                                                  height=27)
-                    Label(win, text="Synonyms not available", font=('calibre', 12, 'normal'), bg="gray90",
-                          wraplength=330).place(x=40, y=550, height=80, width=330)
-                    Button(win, text="Close", bg="gray67", fg="black", command=Exit).place(x=100, y=640, width=200,
-                                                                                           height=30)
+                    tk.Label(win, text="Synonyms", font=("Terminal", 15, "bold"), bg="gray81").place(x=40, y=512,
+                                                                                                     height=27)
+                    tk.Label(win, text="Synonyms not available", font=('calibre', 12, 'normal'), bg="gray90",
+                             wraplength=330).place(x=40, y=550, height=80, width=330)
+                    tk.Button(win, text="Close", bg="gray67", fg="black", command=Exit).place(x=100, y=640, width=200,
+                                                                                              height=30)
             except:
                 messagebox.showerror(title="Error", message="Word is not recognize")
         else:
@@ -93,34 +95,34 @@ def mainWindow():
     global word_entry, win, close_button
 
     # Create the main window
-    win = Tk()
+    win = tk.Tk()
     win.config(bg="gray81")
     win.geometry("400x360")
     win.title("WordBook")
     win.resizable(False, False)
 
     # Main heading label
-    Label(win, text="Welcome to WordBook", font=("Terminal", 18, "bold"), fg="black", bg="gray81").pack(pady=8)
+    tk.Label(win, text="Welcome to WordBook", font=("Terminal", 18, "bold"), fg="black", bg="gray81").pack(pady=8)
 
     # Placing logo
-    image_frame = Frame(win, width=120, height=120, bg="gray81")
+    image_frame = tk.Frame(win, width=120, height=120, bg="gray81")
     image_frame.place(x=140, y=50)
     img = ImageTk.PhotoImage(Image.open("logo.png"))
-    label = Label(image_frame, image=img, bg="gray81")
+    label = tk.Label(image_frame, image=img, bg="gray81")
     label.pack()
 
-    Label(win, text="Powered by RT Production", font=("Terminal", 10, "bold"), bg="gray81").place(x=100, y=170,
-                                                                                                  width=200)
+    tk.Label(win, text="Powered by RT Production", font=("Terminal", 10, "bold"), bg="gray81").place(x=100, y=170,
+                                                                                                     width=200)
 
     # Place the text entry box
-    word_entry = Entry(win, font=('calibre', 15, 'normal'))
+    word_entry = tk.Entry(win, font=('calibre', 15, 'normal'))
     word_entry.place(x=40, y=200, width=320, height=35)
 
     # Submit button
-    Button(win, text="Get Meaning", bg="gray67", fg="black", command=info).place(x=100, y=250, width=200,
-                                                                                 height=30)
+    tk.Button(win, text="Get Meaning", bg="gray67", fg="black", command=info).place(x=100, y=250, width=200,
+                                                                                    height=30)
     # Exit button
-    close_button = Button(win, text="Close", bg="gray67", fg="black", command=Exit)
+    close_button = tk.Button(win, text="Close", bg="gray67", fg="black", command=Exit)
     close_button.place(x=100, y=300, width=200, height=30)
 
     win.mainloop()
