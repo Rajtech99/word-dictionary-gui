@@ -20,9 +20,9 @@ def loadFile(file):
     word = item[0]['word']
     meaning = item[0]['meanings'][0]['definitions'][0]['definition']
     synonyms = item[0]['meanings'][0]['synonyms']
-    sound = item[0]['phonetics'][0]['audio']
+    audio = item[0]['phonetics'][0]['audio']
     os.remove("data.json")
-    return word, sound, meaning, synonyms
+    return word, audio, meaning, synonyms
 
 
 # Play the input text
