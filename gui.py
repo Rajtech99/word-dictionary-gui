@@ -2,8 +2,27 @@ import tkinter as tk
 from tkinter import messagebox
 from PIL import ImageTk, Image
 import requests
-import main
 import vlc
+import json
+import os
+
+
+# Define a function for save the json data
+def saveData(file, content):
+    with open(file, "w") as f:
+        f.write(json.dumps(content))
+
+
+# Define a function for load all data from data.json
+def loadFile(file):
+    with open(file) as f:
+        item = json.load(f)
+    word = item[0]['word']
+    meaning = item[0]['meanings'][0]['definitions'][0]['definition']
+    synonyms = item[0]['meanings'][0]['synonyms']
+    sound = item[0]['phonetics'][0]['audio']
+    os.remove("data.json")
+    return word, sound, meaning, synonyms
 
 
 # Play the input text
@@ -40,8 +59,8 @@ def info():
         # If the input word is a meaningful word
         if code == 200:
             try:
-                main.saveData("data.json", data)
-                value = main.loadFile("data.json")
+                saveData("data.json", data)
+                value = loadFile("data.json")
                 # Get the all required items
                 sound = value[1]
                 meaning = value[2]
